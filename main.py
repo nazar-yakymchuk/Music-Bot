@@ -18,13 +18,18 @@ logging.basicConfig(level=logging.INFO)
 # Налаштування завантаження
 YDL_OPTIONS = {
     'format': 'bestaudio/best',
-    'outtmpl': 'downloads/%(id)s.%(ext)s', # Використовуємо ID відео для назви файлу
+    'outtmpl': 'downloads/%(title)s.%(ext)s',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'mp3',
         'preferredquality': '192',
     }],
+    # Додаємо "маскування" під звичайний браузер
+    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+    'quiet': True,
+    'no_warnings': True,
 }
+
 
 @dp.message(Command("start"))
 async def start_handler(message: types.Message):
